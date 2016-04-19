@@ -1,5 +1,8 @@
 package asl.console.configuration;
 
+import asl.console.databaseconnection.DatabaseConnector;
+
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 /**
@@ -7,6 +10,9 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class ConfigurationManagerBean implements ConfigurationManager {
+    @EJB
+    private DatabaseConnector databaseConnector;
+
     @Override
     public Object retrieveConfiguration() {
         //todo implement actual logic
