@@ -9,13 +9,15 @@
    <name>asl-console application</name>
 
    <modules>
-      <module>asl-console-ejb</module>
-      <module>asl-console-web</module>
-      <module>asl-console-ear</module>
+       <module>asl-console-ejb</module>
+       <module>asl-console-vaadin</module>
+       <module>asl-console-ear</module>
    </modules>
 
    <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <vaadin.version>7.6.4</vaadin.version>
+       <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
    </properties>
 
    <dependencyManagement>
@@ -34,7 +36,7 @@
             ourselves in every module -->
          <dependency>
             <groupId>asl</groupId>
-            <artifactId>asl-console-web</artifactId>
+            <artifactId>asl-console-vaadin</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
             <scope>compile</scope>
@@ -97,6 +99,14 @@
               <version>1.9.5</version>
           </dependency>
 
+          <dependency>
+              <groupId>com.vaadin</groupId>
+              <artifactId>vaadin-bom</artifactId>
+              <version>${vaadin.version}</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
+
       </dependencies>
    </dependencyManagement>
 
@@ -118,10 +128,26 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.vaadin</groupId>-->
+            <!--<artifactId>vaadin</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.vaadin</groupId>
-            <artifactId>vaadin</artifactId>
-            <version>6.8.3</version>
+            <artifactId>vaadin-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-push</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-client</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vaadin</groupId>
+            <artifactId>vaadin-themes</artifactId>
         </dependency>
     </dependencies>
 
@@ -152,6 +178,44 @@
                   <skip>true</skip>
                </configuration>
             </plugin>
+
+             <!-- vaadin update widgetset step 1: need (re)build? -->
+             <plugin>
+                 <groupId>com.vaadin</groupId>
+                 <artifactId>vaadin-maven-plugin</artifactId>
+                 <version>1.0.2</version>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>update-widgetset</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
+
+             <!-- vaadin update widgetset part 2: compile -->
+             <plugin>
+                 <groupId>org.codehaus.mojo</groupId>
+                 <artifactId>gwt-maven-plugin</artifactId>
+                 <version>2.3.0-1</version>
+                 <configuration>
+                     <webappDirectory>src/main/webapp/VAADIN/widgetsets</webappDirectory>
+                     <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                     <runTarget>clean</runTarget>
+                     <hostedWebapp>${project.build.directory}/${project.build.finalName}</hostedWebapp>
+                     <noServer>true</noServer>
+                     <port>8080</port>
+                     <soyc>false</soyc>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <goals>
+                             <goal>resources</goal>
+                             <goal>compile</goal>
+                         </goals>
+                     </execution>
+                 </executions>
+             </plugin>
          </plugins>
       </pluginManagement>
    </build>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" name="design-properties" content="{&quot;RULERS_VISIBLE&quot;:true,&quot;GUIDELINES_VISIBLE&quot;:false,&quot;SNAP_TO_OBJECTS&quot;:true,&quot;SNAP_TO_GRID&quot;:true,&quot;SNAPPING_DISTANCE&quot;:10,&quot;JAVA_SOURCES_ROOT&quot;:&quot;src/main/java&quot;,&quot;THEME&quot;:&quot;mytheme&quot;}">
+</head>
+<body>
+<vaadin-horizontal-layout style-name="valo-menu-responsive" responsive id="responsive-application-template" size-full>
+    <vaadin-css-layout style-name="valo-menu" _id="menuCssLayout">
+        <vaadin-css-layout style-name="valo-menu-part borderless-colored icon-align-right">
+            <vaadin-button icon="fonticon://FontAwesome/f03a" style-name="primary small valo-menu-toggle" plain-text _id="menuToggle">
+                Menu
+            </vaadin-button>
+            <vaadin-css-layout style-name="valo-menuitems" _id="mainMenu">
+                <vaadin-button icon="fonticon://FontAwesome/f015" style-name="als-home-button huge icon-align-right borderless" width-full height="150px" plain-text _id="aslHomeButton">
+                    ASL Console
+                </vaadin-button>
+                <vaadin-button icon="fonticon://FontAwesome/f233" primary-style-name="valo-menu-item" _id="dataTransferButton">
+                    Servers state
+                    <span class="valo-menu-badge">7</span>
+                </vaadin-button>
+                <vaadin-button icon="fonticon://FontAwesome/f15c" primary-style-name="valo-menu-item" _id="logsButton">
+                    Logs
+                </vaadin-button>
+                <vaadin-button icon="fonticon://FontAwesome/f067" primary-style-name="valo-menu-item" style-name="add-functionality-button" height="30px" _id="addFunctionality">
+                    Add Functionality
+                </vaadin-button>
+            </vaadin-css-layout>
+        </vaadin-css-layout>
+    </vaadin-css-layout>
+    <vaadin-css-layout width="682px" _id="contentCsslayout" :expand>
+        <vaadin-vertical-layout spacing margin _id="contentVerticalLayout">
+            <vaadin-label style-name="h1" size-auto plain-text _id="pageTitleLabel">
+                Example page title
+            </vaadin-label>
+            <vaadin-table responsive width="711px" height="224px" readonly _id="serversStateTable"></vaadin-table>
+            <vaadin-label style-name="tiny" size-auto plain-text _id="authorsLabel" :bottom>
+                Created by Aleksander Klinkowski, Kamil Kulig, Rafał Martyna and Kamil Szydło
+            </vaadin-label>
+        </vaadin-vertical-layout>
+    </vaadin-css-layout>
+</vaadin-horizontal-layout>
+</body>
+</html>
