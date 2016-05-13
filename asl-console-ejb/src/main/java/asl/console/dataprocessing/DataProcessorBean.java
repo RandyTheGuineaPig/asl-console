@@ -2,9 +2,16 @@ package asl.console.dataprocessing;
 
 import asl.console.configuration.ConfigurationManager;
 import asl.console.databaseconnection.DatabaseConnector;
+import asl.exceptions.InvalidEntityException;
+import asl.dto.ConfigurationVector;
+import asl.dto.ServerDetailsDto;
+import asl.dto.ServerStateDto;
+
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by sengir on 19.04.16.
@@ -18,10 +25,11 @@ public class DataProcessorBean implements DataProcessor {
     private ConfigurationManager configurationManager;
 
     @Override
-    public void storeDataInDb(Object data) {
-        //todo implement actual logic
+    public void storeDataInDb(Object data) throws InvalidEntityException {
+        databaseConnector.storeInDb(data);
     }
 
+    @Deprecated
     @Override
     public Object retrieveDataFromDb() {
         //todo implement actual logic
@@ -29,9 +37,40 @@ public class DataProcessorBean implements DataProcessor {
     }
 
     @Override
-    public Object getConfiguration() {
-        //todo implement actual logic
-        return null;
+    public List<ServerStateDto> getServers() {
+        final List<ServerStateDto> servers = new ArrayList<ServerStateDto>();
+        for (final ServerDetailsDto serverDetailsDto : databaseConnector.getServersByName(".*")) {
+            final String serverName = serverDetailsDto.getServerName();
+            ServerStateDto serverStateDto;
+            final List<ConfigurationVector> matchingConfigurationVectors = databaseConnector.getConfigurationVectorsByName(serverName);
+            if (matchingConfigurationVectors.size() == 1) {
+                final ConfigurationVector configurationVector = matchingConfigurationVectors.get(0);
+                serverStateDto = configurationVector.applyTo(serverDetailsDto);
+            } else {
+                serverStateDto = ServerStateDto.getDefaultServerStateDto();
+                serverStateDto.setServerName(serverName);
+            }
+            servers.add(serverStateDto);
+        }
+        return servers;
+    }
+
+    @Override
+    public ServerDetailsDto getServerDetails(final String serverName) {
+        return databaseConnector.getServersByName(serverName).get(0);
+    }
+
+    @Override
+    public List<ConfigurationVector> getConfigurations() {
+        return databaseConnector.getConfigurationVectorsByName(".*");
+    }
+
+    @Override
+    public void addServer(String serverName, String ipAddress) throws InvalidEntityException {
+        final ServerDetailsDto serverDetailsDto = new ServerDetailsDto();
+        serverDetailsDto.setServerName(serverName);
+        serverDetailsDto.setIpAddress(ipAddress);
+        databaseConnector.storeInDb(serverDetailsDto);
     }
 
     @Override

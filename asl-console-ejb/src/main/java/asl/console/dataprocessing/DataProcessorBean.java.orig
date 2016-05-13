@@ -1,0 +1,60 @@
+package asl.console.dataprocessing;
+
+import asl.console.configuration.ConfigurationManager;
+import asl.console.databaseconnection.DatabaseConnector;
+<<<<<<< HEAD
+=======
+import asl.dto.ConfigurationVector;
+import asl.dto.ServerDetailsDto;
+import asl.dto.ServerStateDto;
+import asl.exceptions.ConfigurationNotFoundException;
+import asl.exceptions.InvalidEntityException;
+import asl.mock.MockDataGenerator;
+>>>>>>> 4c22a7f... Added REST endpoint for inserting data
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+
+/**
+ * Created by sengir on 19.04.16.
+ */
+@Stateless
+public class DataProcessorBean implements DataProcessor {
+    @EJB
+    private DatabaseConnector databaseConnector;
+
+    @EJB
+    private ConfigurationManager configurationManager;
+
+    @Override
+    public void storeDataInDb(Object data) throws InvalidEntityException {
+        databaseConnector.storeInDb(data);
+    }
+
+    @Deprecated
+    @Override
+    public Object retrieveDataFromDb() {
+        //todo implement actual logic
+        return null;
+    }
+
+    @Override
+    public Object getConfiguration() {
+        //todo implement actual logic
+        return null;
+    }
+
+    @Override
+    public void addServer(String serverName, String ipAddress) throws InvalidEntityException {
+        final ServerDetailsDto serverDetailsDto = new ServerDetailsDto();
+        serverDetailsDto.setServerName(serverName);
+        serverDetailsDto.setIpAddress(ipAddress);
+        databaseConnector.storeInDb(serverDetailsDto);
+    }
+
+    @Override
+    public Object processData(Object data) {
+        //todo implement actual logic
+        return null;
+    }
+}

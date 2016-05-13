@@ -1,5 +1,6 @@
 package asl.util;
 
+import asl.mock.MockDataGeneratorBean;
 import org.mockito.InjectMocks;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
