@@ -6,6 +6,7 @@ import asl.exceptions.ConfigurationException;
 import asl.exceptions.InvalidEntityException;
 
 import javax.ejb.Local;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -13,10 +14,10 @@ import java.util.List;
  */
 @Local
 public interface DatabaseConnector {
-    void storeInDb(Object object) throws InvalidEntityException; //todo change method signature to more appropriate
+    void storeInDb(Object object) throws InvalidEntityException, SQLException; //todo change method signature to more appropriate
     void deleteFromDb(Object object) throws InvalidEntityException;
-    Object getFromDb(Object object); //todo change method signature to more appropriate
+    Object getFromDb(Object object) throws SQLException; //todo change method signature to more appropriate
     ConfigurationVector getConfigurationForServer(final String serverName) throws ConfigurationException;
-    List<ServerDetailsDto> getServersByName(final String pattern);
-    List<ConfigurationVector> getConfigurationVectorsByName(final String pattern); //to be deprecated!
+    List<ServerDetailsDto> getServersByName(final String pattern) throws SQLException;
+    List<ConfigurationVector> getConfigurationVectorsByName(final String pattern) throws SQLException; //to be deprecated!
 }

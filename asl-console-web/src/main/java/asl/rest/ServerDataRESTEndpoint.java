@@ -6,6 +6,7 @@ import asl.util.JsonBuilder;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import java.sql.SQLException;
 
 /**
  * Created by sengir on 14.05.16.
@@ -20,14 +21,22 @@ public class ServerDataRESTEndpoint {
     @Path("/get")
     @Produces("text/plain")
     public String getServers() {
-        return JsonBuilder.prepareJson(dataProcessor.getServers());
+        try {
+            return JsonBuilder.prepareJson(dataProcessor.getServers());
+        } catch (SQLException e) {
+            return "Oops, something went terribly wong!";
+        }
     }
 
     @GET
     @Path("/get/{serverName}")
     @Produces("text/plain")
     public String getServerDetails(@PathParam("serverName") final String serverName) {
-        return JsonBuilder.prepareJson(dataProcessor.getServerDetails(serverName));
+        try {
+            return JsonBuilder.prepareJson(dataProcessor.getServerDetails(serverName));
+        } catch (SQLException e) {
+            return "Oops, something went terribly wong!";
+        }
     }
 
     @GET
@@ -37,6 +46,9 @@ public class ServerDataRESTEndpoint {
             dataProcessor.addServer(serverName, ipAddress);
             return "Successfully added server: " + serverName + " with IP address: " + ipAddress;
         } catch (InvalidEntityException e) {
+            return "Oops, something went terribly wong!";
+        } catch (SQLException e) {
+            e.printStackTrace();
             return "Oops, something went terribly wong!";
         }
     }

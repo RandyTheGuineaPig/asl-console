@@ -2,17 +2,15 @@ package asl.dto;
 
 import asl.util.ParameterColor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import javax.persistence.*;
 
 /**
  * Created by sengir on 13.05.16.
  */
-@Entity
+//@Entity
+//@Table(name = "CONFIGURATION")
 public class ConfigurationVector { //info from database
-    @Id
+//    @Id
     private String serverName;
     private double temperatureGreenUpperBound; //todo change those to Doubles and Integers - null values mean no constraint
     private double temperatureYellowUpperBound;
@@ -46,83 +44,83 @@ public class ConfigurationVector { //info from database
         this.serverName = serverName;
     }
 
-    public Double getTemperatureGreenUpperBound() {
+    public double getTemperatureGreenUpperBound() {
         return temperatureGreenUpperBound;
     }
 
-    public void setTemperatureGreenUpperBound(Double temperatureGreenUpperBound) {
+    public void setTemperatureGreenUpperBound(double temperatureGreenUpperBound) {
         this.temperatureGreenUpperBound = temperatureGreenUpperBound;
     }
 
-    public Double getTemperatureYellowUpperBound() {
+    public double getTemperatureYellowUpperBound() {
         return temperatureYellowUpperBound;
     }
 
-    public void setTemperatureYellowUpperBound(Double temperatureYellowUpperBound) {
+    public void setTemperatureYellowUpperBound(double temperatureYellowUpperBound) {
         this.temperatureYellowUpperBound = temperatureYellowUpperBound;
     }
 
-    public Double getCpuLoadGreenUpperBound() {
+    public double getCpuLoadGreenUpperBound() {
         return cpuLoadGreenUpperBound;
     }
 
-    public void setCpuLoadGreenUpperBound(Double cpuLoadGreenUpperBound) {
+    public void setCpuLoadGreenUpperBound(double cpuLoadGreenUpperBound) {
         this.cpuLoadGreenUpperBound = cpuLoadGreenUpperBound;
     }
 
-    public Double getCpuLoadYellowUpperBound() {
+    public double getCpuLoadYellowUpperBound() {
         return cpuLoadYellowUpperBound;
     }
 
-    public void setCpuLoadYellowUpperBound(Double cpuLoadYellowUpperBound) {
+    public void setCpuLoadYellowUpperBound(double cpuLoadYellowUpperBound) {
         this.cpuLoadYellowUpperBound = cpuLoadYellowUpperBound;
     }
 
-    public Double getBandwidthGreenUpperBound() {
+    public double getBandwidthGreenUpperBound() {
         return bandwidthGreenUpperBound;
     }
 
-    public void setBandwidthGreenUpperBound(Double bandwidthGreenUpperBound) {
+    public void setBandwidthGreenUpperBound(double bandwidthGreenUpperBound) {
         this.bandwidthGreenUpperBound = bandwidthGreenUpperBound;
     }
 
-    public Double getBandwidthYellowUpperBound() {
+    public double getBandwidthYellowUpperBound() {
         return bandwidthYellowUpperBound;
     }
 
-    public void setBandwidthYellowUpperBound(Double bandwidthYellowUpperBound) {
+    public void setBandwidthYellowUpperBound(double bandwidthYellowUpperBound) {
         this.bandwidthYellowUpperBound = bandwidthYellowUpperBound;
     }
 
-    public Integer getIopsGreenUpperBound() {
+    public int getIopsGreenUpperBound() {
         return iopsGreenUpperBound;
     }
 
-    public void setIopsGreenUpperBound(Integer iopsGreenUpperBound) {
+    public void setIopsGreenUpperBound(int iopsGreenUpperBound) {
         this.iopsGreenUpperBound = iopsGreenUpperBound;
     }
 
-    public Integer getIopsYellowUpperBound() {
+    public int getIopsYellowUpperBound() {
         return iopsYellowUpperBound;
     }
 
-    public void setIopsYellowUpperBound(Integer iopsYellowUpperBound) {
+    public void setIopsYellowUpperBound(int iopsYellowUpperBound) {
         this.iopsYellowUpperBound = iopsYellowUpperBound;
     }
 
-    public Double getRamLoadGreenUpperBound() {
+    public double getRamLoadGreenUpperBound() {
         return ramLoadGreenUpperBound;
     }
 
-    public void setRamLoadGreenUpperBound(Double ramLoadGreenUpperBound) {
+    public void setRamLoadGreenUpperBound(double ramLoadGreenUpperBound) {
         this.ramLoadGreenUpperBound = ramLoadGreenUpperBound;
     }
 
-    public Double getRamLoadYellowUpperBound() {
+    public double getRamLoadYellowUpperBound() {
         return ramLoadYellowUpperBound;
     }
 
-    public void setRamLoadYellowUpperBound(Double ramLoadYellowUpperBound) {
+    public void setRamLoadYellowUpperBound(double ramLoadYellowUpperBound) {
         this.ramLoadYellowUpperBound = ramLoadYellowUpperBound;
     }
 

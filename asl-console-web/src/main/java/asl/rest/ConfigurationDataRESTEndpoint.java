@@ -7,6 +7,7 @@ import asl.util.JsonBuilder;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
+import java.sql.SQLException;
 
 /**
  * Created by sengir on 14.05.16.
@@ -21,7 +22,11 @@ public class ConfigurationDataRESTEndpoint {
     @Path("/get")
     @Produces("text/plain")
     public String getConfigurations() {
-        return JsonBuilder.prepareJson(dataProcessor.getConfigurations());
+        try {
+            return JsonBuilder.prepareJson(dataProcessor.getConfigurations());
+        } catch (SQLException e) {
+            return "Oops, something went terribly wong!";
+        }
     }
 
     @GET
@@ -32,6 +37,8 @@ public class ConfigurationDataRESTEndpoint {
         } catch (InvalidEntityException e) {
             return e.getMessage();
         } catch (ConfigurationException e) {
+            return e.getMessage();
+        } catch (SQLException e) {
             return e.getMessage();
         }
         return String.format("Successfully added configuration for server: %s", serverName);

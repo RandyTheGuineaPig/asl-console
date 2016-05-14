@@ -10,6 +10,7 @@ import asl.dto.ServerStateDto;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class DataProcessorBean implements DataProcessor {
     private ConfigurationManager configurationManager;
 
     @Override
-    public void storeDataInDb(Object data) throws InvalidEntityException {
+    public void storeDataInDb(Object data) throws InvalidEntityException, SQLException {
         databaseConnector.storeInDb(data);
     }
 
@@ -56,9 +57,9 @@ public class DataProcessorBean implements DataProcessor {
     }
 
     @Override
-    public List<ServerStateDto> getServers() {
+    public List<ServerStateDto> getServers() throws SQLException {
         final List<ServerStateDto> servers = new ArrayList<ServerStateDto>();
-        for (final ServerDetailsDto serverDetailsDto : databaseConnector.getServersByName(".*")) {
+        for (final ServerDetailsDto serverDetailsDto : databaseConnector.getServersByName("")) {
             final String serverName = serverDetailsDto.getServerName();
             ServerStateDto serverStateDto;
             final List<ConfigurationVector> matchingConfigurationVectors = databaseConnector.getConfigurationVectorsByName(serverName);
@@ -75,17 +76,17 @@ public class DataProcessorBean implements DataProcessor {
     }
 
     @Override
-    public ServerDetailsDto getServerDetails(final String serverName) {
+    public ServerDetailsDto getServerDetails(final String serverName) throws SQLException {
         return databaseConnector.getServersByName(serverName).get(0);
     }
 
     @Override
-    public List<ConfigurationVector> getConfigurations() {
-        return databaseConnector.getConfigurationVectorsByName(".*");
+    public List<ConfigurationVector> getConfigurations() throws SQLException {
+        return databaseConnector.getConfigurationVectorsByName("");
     }
 
     @Override
-    public void addServer(String serverName, String ipAddress) throws InvalidEntityException {
+    public void addServer(String serverName, String ipAddress) throws InvalidEntityException, SQLException {
         final ServerDetailsDto serverDetailsDto = new ServerDetailsDto();
         serverDetailsDto.setServerName(serverName);
         serverDetailsDto.setIpAddress(ipAddress);
