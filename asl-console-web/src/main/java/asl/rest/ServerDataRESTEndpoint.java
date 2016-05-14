@@ -1,7 +1,6 @@
 package asl.rest;
 
 import asl.console.dataprocessing.DataProcessor;
-import asl.exceptions.ConfigurationException;
 import asl.exceptions.InvalidEntityException;
 import asl.util.JsonBuilder;
 
@@ -11,13 +10,28 @@ import javax.ws.rs.*;
 /**
  * Created by sengir on 14.05.16.
  */
-@Path("/")
-public class StoreDataRESTEndpoint {
+@Path("/monitored")
+public class ServerDataRESTEndpoint {
     @EJB
     private DataProcessor dataProcessor;
 
+
     @GET
-    @Path("/add-server")
+    @Path("/get")
+    @Produces("text/plain")
+    public String getServers() {
+        return JsonBuilder.prepareJson(dataProcessor.getServers());
+    }
+
+    @GET
+    @Path("/get/{serverName}")
+    @Produces("text/plain")
+    public String getServerDetails(@PathParam("serverName") final String serverName) {
+        return JsonBuilder.prepareJson(dataProcessor.getServerDetails(serverName));
+    }
+
+    @GET
+    @Path("/store")
     public String addServerData(@QueryParam("serverName") String serverName, @QueryParam("ipAddress") String ipAddress) {
         try {
             dataProcessor.addServer(serverName, ipAddress);
@@ -25,19 +39,17 @@ public class StoreDataRESTEndpoint {
         } catch (InvalidEntityException e) {
             return "Oops, something went terribly wong!";
         }
-        //todo better stati
     }
 
     @GET
-    @Path("/add-configuration")
-    public String addConfiguration(@QueryParam("serverName") String serverName, @QueryParam("config") String config) { //remember! URI has to have { replaced with %7B and } with %7D
+    @Path("/delete")
+    @Produces("text/plain")
+    public String deleteServerData(@QueryParam("serverName") final String serverName) {
         try {
-            dataProcessor.storeDataInDb(JsonBuilder.prepareConfigurationVector(config));
+            dataProcessor.removeServerFromDb(serverName);
         } catch (InvalidEntityException e) {
             return e.getMessage();
-        } catch (ConfigurationException e) {
-            return e.getMessage();
         }
-        return String.format("Successfully added configuration for server: %s", serverName);
+        return String.format("Successfully deleted configuration for server: %s", serverName);
     }
 }

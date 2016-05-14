@@ -29,6 +29,25 @@ public class DataProcessorBean implements DataProcessor {
         databaseConnector.storeInDb(data);
     }
 
+    @Override
+    public void removeDataFromDb(Object data) throws InvalidEntityException {
+        databaseConnector.deleteFromDb(data);
+    }
+
+    @Override
+    public void removeServerFromDb(String serverName) throws InvalidEntityException {
+        final ServerDetailsDto serverDetailsDto = new ServerDetailsDto();
+        serverDetailsDto.setServerName(serverName);
+        databaseConnector.deleteFromDb(serverDetailsDto);
+    }
+
+    @Override
+    public void removeConfigurationFromDb(String serverName) throws InvalidEntityException {
+        final ConfigurationVector configurationVector = new ConfigurationVector();
+        configurationVector.setServerName(serverName);
+        databaseConnector.deleteFromDb(configurationVector);
+    }
+
     @Deprecated
     @Override
     public Object retrieveDataFromDb() {

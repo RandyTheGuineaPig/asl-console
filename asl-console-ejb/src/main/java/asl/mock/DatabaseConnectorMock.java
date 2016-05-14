@@ -47,6 +47,17 @@ public class DatabaseConnectorMock implements DatabaseConnector {
     }
 
     @Override
+    public void deleteFromDb(Object object) throws InvalidEntityException {
+        if (object instanceof ServerDetailsDto) {
+            servers.remove(((ServerDetailsDto) object).getServerName());
+        } else if (object instanceof ConfigurationVector) {
+            configurations.remove(((ConfigurationVector) object).getServerName());
+        } else {
+            throw new InvalidEntityException("Provided object could not be removed from database because it is not a valid object");
+        }
+    }
+
+    @Override
     public Object getFromDb(Object object) {
         return null;
     }
