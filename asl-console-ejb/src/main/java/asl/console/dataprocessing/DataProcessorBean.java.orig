@@ -7,7 +7,7 @@ import asl.console.databaseconnection.DatabaseConnector;
 import asl.dto.ConfigurationVector;
 import asl.dto.ServerDetailsDto;
 import asl.dto.ServerStateDto;
-import asl.exceptions.ConfigurationNotFoundException;
+import asl.exceptions.ConfigurationException;
 import asl.exceptions.InvalidEntityException;
 import asl.mock.MockDataGenerator;
 >>>>>>> 4c22a7f... Added REST endpoint for inserting data

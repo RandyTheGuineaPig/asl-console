@@ -3,7 +3,7 @@ package asl.mock;
 import asl.console.databaseconnection.DatabaseConnector;
 import asl.dto.ConfigurationVector;
 import asl.dto.ServerDetailsDto;
-import asl.exceptions.ConfigurationNotFoundException;
+import asl.exceptions.ConfigurationException;
 import asl.exceptions.InvalidEntityException;
 
 import javax.annotation.PostConstruct;

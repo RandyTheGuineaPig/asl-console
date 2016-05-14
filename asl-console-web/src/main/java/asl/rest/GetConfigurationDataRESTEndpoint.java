@@ -1,6 +1,7 @@
 package asl.rest;
 
 import asl.console.dataprocessing.DataProcessor;
+import asl.util.JsonBuilder;
 
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
@@ -18,6 +19,6 @@ public class GetConfigurationDataRESTEndpoint {
     @GET
     @Produces("text/plain")
     public String getConfigurations() {
-        return dataProcessor.getConfigurations().toString();
+        return JsonBuilder.prepareJson(dataProcessor.getConfigurations());
     }
 }

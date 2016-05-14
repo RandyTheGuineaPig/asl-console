@@ -3,7 +3,7 @@ package asl.mock;
 import asl.console.databaseconnection.DatabaseConnector;
 import asl.dto.ConfigurationVector;
 import asl.dto.ServerDetailsDto;
-import asl.exceptions.ConfigurationNotFoundException;
+import asl.exceptions.ConfigurationException;
 import asl.exceptions.InvalidEntityException;
 
 import javax.annotation.PostConstruct;
@@ -52,10 +52,10 @@ public class DatabaseConnectorMock implements DatabaseConnector {
     }
 
     @Override
-    public ConfigurationVector getConfigurationForServer(String serverName) throws ConfigurationNotFoundException {
+    public ConfigurationVector getConfigurationForServer(String serverName) throws ConfigurationException {
         final ConfigurationVector configurationVector = configurations.get(serverName);
         if (configurationVector == null) {
-            throw new ConfigurationNotFoundException("Configuration for " + serverName + " not found");
+            throw new ConfigurationException("Configuration for " + serverName + " not found");
         }
         return configurationVector;
     }

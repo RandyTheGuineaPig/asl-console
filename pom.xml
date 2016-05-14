@@ -16,6 +16,7 @@
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <version.jackson.core>2.7.4</version.jackson.core>
    </properties>
 
    <dependencyManagement>
@@ -122,6 +123,18 @@
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin</artifactId>
             <version>6.8.3</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${version.jackson.core}</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${version.jackson.core}</version>
         </dependency>
     </dependencies>
 
