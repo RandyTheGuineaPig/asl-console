@@ -1,10 +1,7 @@
 package asl.dto;
 
-import javax.enterprise.inject.New;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-
-import static javax.swing.text.html.HTML.Tag.HEAD;
 
 /**
  * Created by sengir on 13.05.16.
@@ -15,6 +12,10 @@ public class ServerDetailsDto {
     private String serverName;
     private String ipAddress;
     private double temperature;
+    private double cpuLoad;
+    private double bandwidth;
+    private int iops;
+    private double ramLoad;
 
     public String getServerName() {
         return serverName;
@@ -40,12 +41,48 @@ public class ServerDetailsDto {
         this.temperature = temperature;
     }
 
+    public double getCpuLoad() {
+        return cpuLoad;
+    }
+
+    public void setCpuLoad(double cpuLoad) {
+        this.cpuLoad = cpuLoad;
+    }
+
+    public double getBandwidth() {
+        return bandwidth;
+    }
+
+    public void setBandwidth(double bandwidth) {
+        this.bandwidth = bandwidth;
+    }
+
+    public int getIops() {
+        return iops;
+    }
+
+    public void setIops(int iops) {
+        this.iops = iops;
+    }
+
+    public double getRamLoad() {
+        return ramLoad;
+    }
+
+    public void setRamLoad(double ramLoad) {
+        this.ramLoad = ramLoad;
+    }
+
     @Override
     public String toString() {
         return "ServerDetailsDto{" +
                 "serverName='" + serverName + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", temperature=" + temperature +
+                ", cpuLoad=" + cpuLoad +
+                ", bandwidth=" + bandwidth +
+                ", iops=" + iops +
+                ", ramLoad=" + ramLoad +
                 '}';
     }
 }
