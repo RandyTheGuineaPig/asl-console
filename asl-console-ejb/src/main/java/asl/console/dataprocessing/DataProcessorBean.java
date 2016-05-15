@@ -31,19 +31,19 @@ public class DataProcessorBean implements DataProcessor {
     }
 
     @Override
-    public void removeDataFromDb(Object data) throws InvalidEntityException {
+    public void removeDataFromDb(Object data) throws InvalidEntityException, SQLException {
         databaseConnector.deleteFromDb(data);
     }
 
     @Override
-    public void removeServerFromDb(String serverName) throws InvalidEntityException {
+    public void removeServerFromDb(String serverName) throws InvalidEntityException, SQLException {
         final ServerDetailsDto serverDetailsDto = new ServerDetailsDto();
         serverDetailsDto.setServerName(serverName);
         databaseConnector.deleteFromDb(serverDetailsDto);
     }
 
     @Override
-    public void removeConfigurationFromDb(String serverName) throws InvalidEntityException {
+    public void removeConfigurationFromDb(String serverName) throws InvalidEntityException, SQLException {
         final ConfigurationVector configurationVector = new ConfigurationVector();
         configurationVector.setServerName(serverName);
         databaseConnector.deleteFromDb(configurationVector);

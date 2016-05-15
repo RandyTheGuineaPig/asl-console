@@ -17,6 +17,10 @@ public class ServerStateDto {
     public static ServerStateDto getDefaultServerStateDto() {
         final ServerStateDto defaultServerStateDto = new ServerStateDto();
         defaultServerStateDto.setTemperature(ParameterColor.GREEN);
+        defaultServerStateDto.setCpuLoad(ParameterColor.GREEN);
+        defaultServerStateDto.setBandwidth(ParameterColor.GREEN);
+        defaultServerStateDto.setIops(ParameterColor.GREEN);
+        defaultServerStateDto.setRamLoad(ParameterColor.GREEN);
         return defaultServerStateDto;
     }
 

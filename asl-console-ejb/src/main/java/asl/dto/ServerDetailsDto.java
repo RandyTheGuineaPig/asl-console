@@ -5,10 +5,7 @@ import javax.persistence.*;
 /**
  * Created by sengir on 13.05.16.
  */
-//@Entity
-//@Table(name = "SERVERS")
 public class ServerDetailsDto {
-//    @Id
     private String serverName;
     private String ipAddress;
     private double temperature;

@@ -15,9 +15,9 @@ import java.util.List;
 @Local
 public interface DataProcessor {
     void storeDataInDb(Object data) throws InvalidEntityException, SQLException; //todo change parameter and return types to more appropriate ones
-    void removeDataFromDb(Object data) throws InvalidEntityException;
-    void removeServerFromDb(String serverName) throws InvalidEntityException;
-    void removeConfigurationFromDb(String serverName) throws InvalidEntityException;
+    void removeDataFromDb(Object data) throws InvalidEntityException, SQLException;
+    void removeServerFromDb(String serverName) throws InvalidEntityException, SQLException;
+    void removeConfigurationFromDb(String serverName) throws InvalidEntityException, SQLException;
     Object retrieveDataFromDb(); //todo change parameter and return types to more appropriate ones
     void addServer(final String serverName, final String ipAddress) throws InvalidEntityException, SQLException;
     List<ServerStateDto> getServers() throws SQLException;

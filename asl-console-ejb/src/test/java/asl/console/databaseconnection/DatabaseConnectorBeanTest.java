@@ -1,11 +1,14 @@
 package asl.console.databaseconnection;
 
 import asl.console.configuration.ConfigurationManagerBean;
+import asl.exceptions.InvalidEntityException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.sql.SQLException;
 
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -22,15 +25,15 @@ public class DatabaseConnectorBeanTest {
         initMocks(this);
     }
 
-    @Test
-    public void testGetFromDb() {
+    @Test(expectedExceptions = {InvalidEntityException.class})
+    public void testGetFromDb() throws SQLException, InvalidEntityException {
         databaseConnectorBeanToTest.getFromDb(new Object());
 //        Assert.fail();
         //todo implement test
     }
 
-    @Test
-    public void testStoreInDb() {
+    @Test(expectedExceptions = {InvalidEntityException.class})
+    public void testStoreInDb() throws SQLException, InvalidEntityException {
         databaseConnectorBeanToTest.storeInDb(new Object());
 //        Assert.fail();
         //todo implement test

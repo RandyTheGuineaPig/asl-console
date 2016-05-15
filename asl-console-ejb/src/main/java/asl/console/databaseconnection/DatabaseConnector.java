@@ -15,9 +15,9 @@ import java.util.List;
 @Local
 public interface DatabaseConnector {
     void storeInDb(Object object) throws InvalidEntityException, SQLException; //todo change method signature to more appropriate
-    void deleteFromDb(Object object) throws InvalidEntityException;
-    Object getFromDb(Object object) throws SQLException; //todo change method signature to more appropriate
-    ConfigurationVector getConfigurationForServer(final String serverName) throws ConfigurationException;
+    void deleteFromDb(Object object) throws InvalidEntityException, SQLException;
+    Object getFromDb(Object object) throws SQLException, InvalidEntityException; //todo change method signature to more appropriate
+    ConfigurationVector getConfigurationForServer(final String serverName) throws ConfigurationException, SQLException;
     List<ServerDetailsDto> getServersByName(final String pattern) throws SQLException;
     List<ConfigurationVector> getConfigurationVectorsByName(final String pattern) throws SQLException; //to be deprecated!
 }

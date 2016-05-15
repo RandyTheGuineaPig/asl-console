@@ -61,6 +61,8 @@ public class ServerDataRESTEndpoint {
             dataProcessor.removeServerFromDb(serverName);
         } catch (InvalidEntityException e) {
             return e.getMessage();
+        } catch (SQLException e) {
+            return e.getMessage();
         }
         return String.format("Successfully deleted configuration for server: %s", serverName);
     }

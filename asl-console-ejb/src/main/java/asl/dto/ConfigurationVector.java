@@ -7,10 +7,7 @@ import javax.persistence.*;
 /**
  * Created by sengir on 13.05.16.
  */
-//@Entity
-//@Table(name = "CONFIGURATION")
 public class ConfigurationVector { //info from database
-//    @Id
     private String serverName;
     private double temperatureGreenUpperBound; //todo change those to Doubles and Integers - null values mean no constraint
     private double temperatureYellowUpperBound;
